@@ -1,0 +1,48 @@
+<svg viewBox="0 0 780 700" xmlns="http://www.w3.org/2000/svg"
+     font-family="'JetBrains Mono','Cascadia Code','Fira Code','SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace">
+
+<rect width="780" height="700" rx="14" fill="#313244"/>
+
+<!-- ascii logo (unchanged) -->
+<text x="30" y="40" font-size="10" fill="#cdd6f4" xml:space="preserve">██████╗ ██╗  ██╗██████╗ ██╗   ██╗████████╗██╗     ███████╗██╗    ██╗ █████╗ ██╗███╗   ██╗</text>
+<text x="30" y="54" font-size="10" fill="#cdd6f4" xml:space="preserve">██╔══██╗██║  ██║██╔══██╗██║   ██║╚══██╔══╝██║     ██╔════╝██║    ██║██╔══██╗██║████╗  ██║</text>
+<text x="30" y="68" font-size="10" fill="#cdd6f4" xml:space="preserve">██║  ██║███████║██████╔╝██║   ██║   ██║   ██║     ███████╗██║ █╗ ██║███████║██║██╔██╗ ██║</text>
+<text x="30" y="82" font-size="10" fill="#cdd6f4" xml:space="preserve">██║  ██║██╔══██║██╔══██╗██║   ██║   ██║   ██║     ╚════██║██║███╗██║██╔══██║██║██║╚██╗██║</text>
+<text x="30" y="96" font-size="10" fill="#cdd6f4" xml:space="preserve">██████╔╝██║  ██║██║  ██║╚██████╔╝   ██║   ██║ ██║ ███████║╚███╔███╔╝██║  ██║██║██║ ╚████║</text>
+<text x="30" y="110" font-size="10" fill="#cdd6f4" xml:space="preserve">╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝    ╚═╝   ╚═╝ ╚═╝ ╚══════╝ ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝</text>
+<line x1="30" y1="126" x2="750" y2="126" stroke="#45475a" stroke-width="1"/>
+
+<!-- ===== CARD 1: whoami (peach accent) ===== -->
+<rect x="30" y="150" width="720" height="180" rx="10" fill="#1e1e2e"/>
+<rect x="30" y="150" width="4" height="180" rx="2" fill="#fab387"/>
+<circle cx="52" cy="180" r="4" fill="#fab387"/>
+<text x="66" y="185" font-size="16" font-weight="700" fill="#fab387">whoami</text>
+
+<text x="50" y="212" font-size="13.5"><tspan fill="#a6adc8">▸ role</tspan><tspan x="220" fill="#cdd6f4">Backend Lead @ PharmaStock</tspan></text>
+<text x="50" y="236" font-size="13.5"><tspan fill="#a6adc8">▸ reading</tspan><tspan x="220" fill="#cdd6f4">Nerdy books, always mid-book on something technical</tspan></text>
+<text x="50" y="260" font-size="13.5"><tspan fill="#a6adc8">▸ style</tspan><tspan x="220" fill="#cdd6f4">Vibecoding with my conscience</tspan></text>
+<text x="50" y="284" font-size="13.5"><tspan fill="#a6adc8">▸ skill</tspan><tspan x="220" fill="#cdd6f4">Knows how to build drones</tspan></text>
+<text x="50" y="308" font-size="13.5"><tspan fill="#a6adc8">▸ fun fact</tspan><tspan x="220" fill="#cdd6f4">Mining Engineer by academics, Backend Engineer by choice</tspan></text>
+
+<!-- ===== CARD 2: stack (blue accent) ===== -->
+<rect x="30" y="346" width="720" height="180" rx="10" fill="#1e1e2e"/>
+<rect x="30" y="346" width="4" height="180" rx="2" fill="#89b4fa"/>
+<circle cx="52" cy="376" r="4" fill="#89b4fa"/>
+<text x="66" y="381" font-size="16" font-weight="700" fill="#89b4fa">stack</text>
+
+<text x="50" y="408" font-size="13.5"><tspan fill="#a6adc8">▸ languages</tspan><tspan x="220" fill="#cdd6f4">Go, Python, TypeScript</tspan></text>
+<text x="50" y="432" font-size="13.5"><tspan fill="#a6adc8">▸ backend</tspan><tspan x="220" fill="#cdd6f4">Go, Echo, Node.js</tspan></text>
+<text x="50" y="456" font-size="13.5"><tspan fill="#a6adc8">▸ frontend</tspan><tspan x="220" fill="#cdd6f4">React, Next.js</tspan></text>
+<text x="50" y="480" font-size="13.5"><tspan fill="#a6adc8">▸ databases</tspan><tspan x="220" fill="#cdd6f4">PostgreSQL, MongoDB, Redis</tspan></text>
+<text x="50" y="504" font-size="13.5"><tspan fill="#a6adc8">▸ infra / tools</tspan><tspan x="220" fill="#cdd6f4">Docker, Coolify, GCP, Git, BullMQ</tspan></text>
+
+<!-- ===== CARD 3: social (green accent) ===== -->
+<rect x="30" y="542" width="720" height="110" rx="10" fill="#1e1e2e"/>
+<rect x="30" y="542" width="4" height="110" rx="2" fill="#a6e3a1"/>
+<circle cx="52" cy="572" r="4" fill="#a6e3a1"/>
+<text x="66" y="577" font-size="16" font-weight="700" fill="#a6e3a1">social</text>
+
+<text x="50" y="604" font-size="14.5"><tspan fill="#a6adc8">▸ portfolio</tspan><tspan x="220" fill="#89b4fa" font-weight="600" text-decoration="underline">dhrutinandan.space</tspan></text>
+<text x="50" y="630" font-size="14.5"><tspan fill="#a6adc8">▸ x</tspan><tspan x="220" fill="#89b4fa" font-weight="600" text-decoration="underline">@D_SwainX</tspan></text>
+
+</svg>
