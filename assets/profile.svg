@@ -31,8 +31,8 @@
 <text x="66" y="381" font-size="16" font-weight="700" fill="#89b4fa">stack</text>
 
 <text x="50" y="408" font-size="13.5"><tspan fill="#a6adc8">▸ languages</tspan><tspan x="220" fill="#cdd6f4">Go, Python, TypeScript</tspan></text>
-<text x="50" y="432" font-size="13.5"><tspan fill="#a6adc8">▸ backend</tspan><tspan x="220" fill="#cdd6f4">Go, Echo, Node.js</tspan></text>
-<text x="50" y="456" font-size="13.5"><tspan fill="#a6adc8">▸ frontend</tspan><tspan x="220" fill="#cdd6f4">React, Next.js</tspan></text>
+<text x="50" y="432" font-size="13.5"><tspan fill="#a6adc8">▸ backend</tspan><tspan x="220" fill="#cdd6f4">Go, Echo, Node.js, Express</tspan></text>
+<text x="50" y="456" font-size="13.5"><tspan fill="#a6adc8">▸ frontend</tspan><tspan x="220" fill="#cdd6f4">React, Next.js, HTMX</tspan></text>
 <text x="50" y="480" font-size="13.5"><tspan fill="#a6adc8">▸ databases</tspan><tspan x="220" fill="#cdd6f4">PostgreSQL, MongoDB, Redis</tspan></text>
 <text x="50" y="504" font-size="13.5"><tspan fill="#a6adc8">▸ infra / tools</tspan><tspan x="220" fill="#cdd6f4">Docker, Coolify, GCP, Git, BullMQ</tspan></text>
 
