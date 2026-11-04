@@ -4,41 +4,21 @@
 
 ### $ whoami
 
-**role** → Software Engineer · Backend & AI<br>
-**exp** → 2 years building backend systems + AI products<br>
-**alma mater** → NIT Rourkela · B.Tech, Mining Engineering<br>
-**off-hours** → building and flying drones<br>
-**status** → ● online · shipping
+Software engineer with 2 years of building backend systems and AI products from the ground up: APIs, distributed services, data pipelines, and AI-powered apps. Mining Engineering grad from NIT Rourkela who found the real calling in software. Off the keyboard: Lego sets and movies.
 
 ### $ tree ~/stack
 
 ~/stack<br>
-├── **languages/** → Go · Python · TypeScript · JavaScript<br>
-├── **backend/** → Echo v5 · Hono · Express.js · FastAPI<br>
-├── **frontend/** → Next.js · React · Tailwind CSS<br>
-├── **data/** → PostgreSQL · MongoDB · Redis · Neo4j · Qdrant<br>
-└── **cloud/** → AWS · GCP · Docker · CI/CD · Railway
+├── **lang** → Go · Python · TypeScript<br>
+├── **backend** → Echo · Hono · Express · FastAPI<br>
+├── **frontend** → Next.js · React · Tailwind<br>
+├── **data** → PostgreSQL · MongoDB · Redis · Neo4j · Qdrant<br>
+└── **cloud** → AWS · GCP · Docker · Railway
 
-### $ cat about.txt
+### $ ping
 
-I studied mining engineering, but somewhere along the way software became my real calling. I like working close to the systems layer: designing APIs, distributed backend services, data pipelines, and AI-powered applications, built from the ground up.
-
-Away from the keyboard I'm deep into building lego sets and watching movies. It keeps me curious about hardware, systems, and everything in between.
-
-I write, build, experiment, and share most of the journey on X.
-
-### $ ping dhruti
-
-I'm most active on X, so that's the best place to reach me. Always up for talking backend systems, AI products, distributed systems, or drones.
+Sharing what I build on X. Happy to talk backend, AI, or distributed systems.
 
 [\[ x \] @D_SwainX](https://twitter.com/D_SwainX) &nbsp;·&nbsp;
 [\[ gh \] swaindhruti](https://github.com/swaindhruti) &nbsp;·&nbsp;
 [\[ www \] dhrutinandan.space](https://dhrutinandan.space)
-
-### $ claude --play
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/swaindhruti/.github/main/assets/clawd-run.gif" alt="Claude Code mascot running through a terminal, jumping over ASCII bugs" width="100%" />
-</p>
-
-<sub>// eof · exit 0</sub>
