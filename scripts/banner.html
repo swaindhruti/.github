@@ -1,0 +1,162 @@
+<!doctype html>
+<!--
+  Profile banner: "DHRUTI" in textured ASCII with Claude Code mascots running around it.
+  Open in a browser to preview the live loop; scripts/render-gif.mjs renders it to assets/banner.gif.
+-->
+<html>
+<head>
+<meta charset="utf-8">
+<style>html, body { margin: 0; background: #0b0b0b; } canvas { display: block; }</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+const W = 1000, H = 360, LOOP = 8;           // logical size (px) and loop length (s)
+const BG = "#0b0b0b", ORANGE = "#D97757";
+const MONO = "Menlo, ui-monospace, SFMono-Regular, Consolas, monospace";
+const NAME = "DHRUTI";
+const ROWS = 20, LH = 9, FS = 9;             // ASCII grid: rows, line height, font size
+const NAME_TOP = 62, GROUND = 302;
+
+const dpr = window.devicePixelRatio || 1;
+const c = document.getElementById("c");
+c.width = W * dpr; c.height = H * dpr;
+c.style.width = W + "px"; c.style.height = H + "px";
+const ctx = c.getContext("2d");
+ctx.scale(dpr, dpr);
+
+function rng(seed) {
+  return () => {
+    seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+// ---- name: rasterise NAME into a grid mask, then fill cells with ASCII ----
+ctx.font = `${FS}px ${MONO}`;
+const CW = ctx.measureText("M").width;
+const COLS = Math.floor((W - 60) / CW);
+const nameW = COLS * CW, nameH = ROWS * LH, NAME_LEFT = (W - nameW) / 2;
+
+const mask = (() => {
+  const m = document.createElement("canvas");
+  m.width = COLS; m.height = ROWS;
+  const g = m.getContext("2d");
+  // one mask pixel per cell; cells are CW x LH, so squash x by CW/LH
+  const size = ROWS / 0.72;                  // Arial Black cap height ~0.72em
+  g.font = `900 ${size}px "Arial Black", Impact, sans-serif`;
+  const sx = LH / CW;                        // glyph units -> cells, keeping true proportions
+  const raw = [...NAME].map(ch => g.measureText(ch).width * sx);
+  const squeeze = Math.min(1, (COLS * 0.8) / raw.reduce((a, b) => a + b, 0));
+  const glyphs = raw.map(w => w * squeeze);
+  const gap = (COLS - glyphs.reduce((a, b) => a + b, 0)) / (NAME.length - 1);
+  g.setTransform(sx * squeeze, 0, 0, 1, 0, 0);
+  g.fillStyle = "#fff"; g.textBaseline = "alphabetic";
+  let x = 0;
+  [...NAME].forEach((ch, i) => { g.fillText(ch, x / (sx * squeeze), ROWS); x += glyphs[i] + gap; });
+  const d = g.getImageData(0, 0, COLS, ROWS).data;
+  return Array.from({ length: ROWS }, (_, r) => Array.from({ length: COLS }, (_, k) => d[(r * COLS + k) * 4 + 3] > 110));
+})();
+const on = (r, k) => r >= 0 && r < ROWS && k >= 0 && k < COLS && mask[r][k];
+
+const nameLayer = document.createElement("canvas");
+nameLayer.width = W * dpr; nameLayer.height = H * dpr;
+(() => {
+  const g = nameLayer.getContext("2d");
+  g.scale(dpr, dpr);
+  g.font = `${FS}px ${MONO}`; g.textBaseline = "top";
+  const rand = rng(1337), fill = "*#+=-:%*+=";
+  for (let r = 0; r < ROWS; r++) for (let k = 0; k < COLS; k++) {
+    if (!mask[r][k]) continue;
+    const edge = !on(r - 1, k) || !on(r + 1, k) || !on(r, k - 1) || !on(r, k + 1);
+    const ch = edge ? (rand() < 0.75 ? "@" : "%#"[rand() * 2 | 0]) : fill[rand() * fill.length | 0];
+    g.fillStyle = edge ? "#f2f2f2" : "#a8a8a8";
+    g.fillText(ch, NAME_LEFT + k * CW, NAME_TOP + r * LH);
+  }
+})();
+
+// top surface of the name, as walkable platform segments [x0, x1] in px
+const platforms = (() => {
+  const segs = []; let start = -1;
+  for (let k = 0; k <= COLS; k++) {
+    const top = k < COLS && mask[0][k] || k < COLS && mask[1][k];
+    if (top && start < 0) start = k;
+    if (!top && start >= 0) { segs.push([NAME_LEFT + start * CW, NAME_LEFT + k * CW]); start = -1; }
+  }
+  return segs;
+})();
+
+// ---- mascot ----
+function clawd(x, bottom, p, t, blinkOffset = 0) {
+  const ox = Math.round(x - 9 * p), oy = Math.round(bottom - 9 * p);
+  const px = (cx, cy, w = 1, h = 1, col = ORANGE) => { ctx.fillStyle = col; ctx.fillRect(ox + cx * p, oy + cy * p, w * p, h * p); };
+  px(3, 0, 12, 7);                           // body
+  px(1, 3, 2, 2); px(15, 3, 2, 2);           // arms
+  const blink = ((t + blinkOffset) % 4) > 3.85;
+  px(5, blink ? 3 : 2, 1, blink ? 0.4 : 2, BG); px(12, blink ? 3 : 2, 1, blink ? 0.4 : 2, BG);
+  const step = Math.floor(t / 0.12) % 2;
+  (step ? [4, 6, 11, 13] : [5, 7, 10, 12]).forEach(cx => px(cx, 7, 1, step ? 2 : 1));
+}
+const hop = (t, t0, dur, h) => (t > t0 && t < t0 + dur) ? h * 4 * ((t - t0) / dur) * (1 - (t - t0) / dur) : 0;
+
+// runner along the tops of the letters, hopping every gap between platforms
+function topRunner(t) {
+  const x = -60 + (W + 120) * ((t / LOOP + 0.5) % 1);   // half a loop out of phase with the walkers
+  const top = NAME_TOP;
+  const segs = [[-1e9, -30], ...platforms, [W + 30, 1e9]];
+  for (let i = 0; i < segs.length; i++) {
+    const [a, b] = segs[i];
+    if (x >= a && x <= b) return [x, top];
+    const next = segs[i + 1];
+    if (next && x > b && x < next[0]) {
+      const span = next[0] - b, u = (x - b) / span;
+      return [x, top - Math.min(28, Math.max(14, span * 0.45)) * 4 * u * (1 - u)];
+    }
+  }
+  return [x, top];
+}
+
+// ---- frame ----
+function render(t) {
+  t = ((t % LOOP) + LOOP) % LOOP;
+  ctx.fillStyle = BG; ctx.fillRect(0, 0, W, H);
+  ctx.drawImage(nameLayer, 0, 0, W, H);
+
+  // ground: dim dotted line that scrolls left
+  ctx.font = `11px ${MONO}`; ctx.fillStyle = "#3a3a3a"; ctx.textBaseline = "alphabetic";
+  const shift = (t / LOOP) * 40;
+  for (let x = -shift; x < W; x += 20) ctx.fillText(".", x, GROUND + 6);
+
+  const [rx, ry] = topRunner(t);
+  clawd(rx, ry, 3, t, 1.3);
+
+  // big walker left -> right; small walker right -> left, jumping over it where they cross
+  const span = W + 120;
+  const ax = -60 + span * (t / LOOP);
+  clawd(ax, GROUND - hop(t, 1.4, 0.55, 26) - hop(t, 6.1, 0.55, 26), 4, t);
+  const bx = W + 60 - span * (t / LOOP);
+  clawd(bx, GROUND - hop(t, LOOP / 2 - 0.45, 0.9, 50) - hop(t, 2.2, 0.45, 20) - hop(t, 6.6, 0.45, 20), 2.5, t + 0.06, 2.4);
+
+  // tagline + blinking cursor
+  ctx.font = `bold 15px ${MONO}`; ctx.textBaseline = "alphabetic";
+  const a = "Backend & AI engineer", b = " — I put feelings into words, Claude turns them into code.";
+  const wa = ctx.measureText(a).width;
+  ctx.font = `15px ${MONO}`;
+  const wb = ctx.measureText(b).width;
+  const x0 = (W - wa - wb) / 2, y = 342;
+  ctx.font = `bold 15px ${MONO}`; ctx.fillStyle = "#f2f2f2"; ctx.fillText(a, x0, y);
+  ctx.font = `15px ${MONO}`; ctx.fillStyle = "#8a8a8a"; ctx.fillText(b, x0 + wa, y);
+  if (t % 1 < 0.5) { ctx.fillStyle = ORANGE; ctx.fillRect(x0 + wa + wb + 6, y - 12, 8, 15); }
+}
+
+window.LOOP = LOOP; window.W = W; window.H = H;
+window.render = render;
+if (!navigator.webdriver) {
+  const t0 = performance.now();
+  (function tick() { render((performance.now() - t0) / 1000); requestAnimationFrame(tick); })();
+} else render(0);
+</script>
+</body>
+</html>

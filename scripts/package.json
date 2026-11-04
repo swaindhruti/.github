@@ -1,0 +1,13 @@
+{
+  "name": "profile-banner",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "banner": "node render-gif.mjs banner.html ../assets/banner.gif"
+  },
+  "dependencies": {
+    "gifenc": "^1.0.3",
+    "pngjs": "^7.0.0",
+    "puppeteer-core": "^24.0.0"
+  }
+}
